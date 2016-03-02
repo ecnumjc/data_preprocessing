@@ -7,14 +7,14 @@ import json
 import os
 from snownlp import SnowNLP
 
-rootdir = "./raw_data"  # Ö¸Ã÷±»±éÀúµÄÎÄ¼ş¼Ğ
+rootdir = "./raw_data"  # æŒ‡æ˜è¢«éå†çš„æ–‡ä»¶å¤¹
 filename = "./raw_sentences/raw_sents.txt"
 fout = open(filename,'w')
 error=0
 
-for parent,dirnames,filenames in os.walk(rootdir): #Èı¸ö²ÎÊı£º·Ö±ğ·µ»Ø1.¸¸Ä¿Â¼ 2.ËùÓĞÎÄ¼ş¼ĞÃû×Ö£¨²»º¬Â·¾¶£© 3.ËùÓĞÎÄ¼şÃû×Ö
-        for filename in filenames:                     #Êä³öÎÄ¼şĞÅÏ¢
-            sourceDir = os.path.join(parent,filename)  #Êä³öÎÄ¼şÂ·¾¶ĞÅÏ¢
+for parent,dirnames,filenames in os.walk(rootdir): #ä¸‰ä¸ªå‚æ•°ï¼šåˆ†åˆ«è¿”å›1.çˆ¶ç›®å½• 2.æ‰€æœ‰æ–‡ä»¶å¤¹åå­—ï¼ˆä¸å«è·¯å¾„ï¼‰ 3.æ‰€æœ‰æ–‡ä»¶åå­—
+        for filename in filenames:                     #è¾“å‡ºæ–‡ä»¶ä¿¡æ¯
+            sourceDir = os.path.join(parent,filename)  #è¾“å‡ºæ–‡ä»¶è·¯å¾„ä¿¡æ¯
             print sourceDir
             fjson = file(sourceDir)
             sent = json.load(fjson)
@@ -22,7 +22,7 @@ for parent,dirnames,filenames in os.walk(rootdir): #Èı¸ö²ÎÊı£º·Ö±ğ·µ»Ø1.¸¸Ä¿Â¼ 2
             if not sent["article"]:
                 error = error + 1
                 continue
-            articlestr = SnowNLP(sent["article"].decode('utf-8'))#ÎÄµµÀ´Ô´ÊÇutf-8±àÂë£¬Ò²ÓĞ¿ÉÄÜÊÇgbk,ÒªÏÈ¼ì²éÒ»ÏÂ
+            articlestr = SnowNLP(sent["article"].decode('utf-8'))#æ–‡æ¡£æ¥æºæ˜¯utf-8ç¼–ç ï¼Œä¹Ÿæœ‰å¯èƒ½æ˜¯gbk,è¦å…ˆæ£€æŸ¥ä¸€ä¸‹
             for i in range(len(articlestr.sentences)):
                 try:
                     print articlestr.sentences[i]
@@ -31,7 +31,7 @@ for parent,dirnames,filenames in os.walk(rootdir): #Èı¸ö²ÎÊı£º·Ö±ğ·µ»Ø1.¸¸Ä¿Â¼ 2
                 except:
                     print 'error!\n'
 
-            titlestr = SnowNLP(sent["title"].decode('utf-8'))#ÎÄµµÀ´Ô´ÊÇutf-8±àÂë£¬Ò²ÓĞ¿ÉÄÜÊÇgbk,ÒªÏÈ¼ì²éÒ»ÏÂ
+            titlestr = SnowNLP(sent["title"].decode('utf-8'))#æ–‡æ¡£æ¥æºæ˜¯utf-8ç¼–ç ï¼Œä¹Ÿæœ‰å¯èƒ½æ˜¯gbk,è¦å…ˆæ£€æŸ¥ä¸€ä¸‹
             for j in range(len(titlestr.sentences)):
                 try:
                     print titlestr.sentences[j]
